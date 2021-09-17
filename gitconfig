@@ -1,0 +1,42 @@
+[core]
+editor = vim
+pager = less -R
+
+[pager]
+status = true
+
+[alias]
+bl = log --first-parent --no-merges
+br = branch
+co = checkout
+ci = commit
+find = "!git log --color -p -S "
+glog = log --graph --abbrev-commit --decorate
+st = status -s
+stu = status -suno
+df = diff --name-status HEAD~1
+dfc = diff --cached
+lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(214 bold)[%an]%C(reset)%C(bold yellow)%d%C(reset)%n%C(white)%B%C(reset)' --all
+lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(214 bold)[%an]%C(reset)%C(bold yellow)%d%C(reset)%n%C(white)%B%C(reset)%n' --name-status
+ls = ls-files
+lsr = ls-tree -r --name-only    
+ff = log --follow -p --
+
+[color]
+diff = auto
+status = auto
+ui = auto
+
+[diff "jupyternotebook"]
+	command = git-nbdiffdriver diff
+[merge "jupyternotebook"]
+	driver = git-nbmergedriver merge %O %A %B %L %P
+	name = jupyter notebook merge driver
+[difftool "nbdime"]
+	cmd = git-nbdifftool diff \"$LOCAL\" \"$REMOTE\" \"$BASE\"
+[difftool]
+	prompt = false
+[mergetool "nbdime"]
+	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[mergetool]
+	prompt = false
